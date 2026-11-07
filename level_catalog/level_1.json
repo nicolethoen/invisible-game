@@ -1,0 +1,20 @@
+{
+  "title": "First level",
+  "start": "entrance",
+  "rooms": {
+    "entrance": {
+      "name": "Entrance",
+      "description": "A cool draft slips beneath the door. Somewhere in the dark, a bell rings once.",
+      "exits": {
+        "north":"foyer"
+      }
+    },
+    "foyer": {
+      "name": "Foyer",
+      "description": "As you walk through the door, your steps echo what sounds like a mostly empty space. Your third step clinks as you've stepped on something metallic.",
+      "exits": {
+        "south":"entrance"
+      }
+    }
+  }
+}

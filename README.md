@@ -1,7 +1,5 @@
 # Invisible Game
 
-An adventure game I'm building as a way to practice writing Go and Python.
-
 The main goal is to create an "invisible game": an adventure whose world is
 discovered through screen-reader output and interaction, with elements that
 aren't apparent visually until the player explores them. I also want the game
@@ -13,7 +11,8 @@ approachable through play.
 
 Development is starting with a command-line adventure. The game is written in
 Go, level data is stored in JSON, and a Python script validates that data. A
-dedicated UI and screen-reader-focused interactions will come later.
+dedicated UI and screen-reader-focused interactions will come later. I'm building
+this as a way to practice writing Go and Python.
 
 ## Run locally
 

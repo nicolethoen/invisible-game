@@ -1,4 +1,4 @@
-# Invisible Game
+# Invisible Game - better name to come
 
 The main goal is to create an "invisible game": an adventure whose world is
 discovered through screen-reader output and interaction, with elements that

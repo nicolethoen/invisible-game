@@ -15,3 +15,8 @@ func NewGame(currentLevelID string, currentRoomID string, inventory []string, ro
 		roomData: roomData,
 	}
 }
+
+func (g *Game) CurrentRoom() (Room, bool) {
+    room, ok := g.roomData[g.currentRoomID]
+    return room, ok
+}

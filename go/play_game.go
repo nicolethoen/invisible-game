@@ -75,9 +75,15 @@ func main() {
 		return
 	}
 
-	current_room := level_data.Rooms[level_data.Start]
+	game_state := Game{
+		currentLevelID: startingLevelID, // initialize the current level id to the starting level id
+		currentRoomID: level_data.Start, // initialize the current room id to the starting room id
+		inventory: []string{}, // initialize the inventory to an empty array
+		roomData: level_data.Rooms, // initialize the room data to the level data
+	}
+
 	// print the current room description and ask what the user wants to do
-	fmt.Println(current_room.Description)	
+	fmt.Println(game_state.roomData[game_state.currentRoomID].Description)	
 	fmt.Println("What do you want to do?")
 
 	scanner := bufio.NewScanner(os.Stdin)
@@ -88,29 +94,35 @@ func main() {
 		}
 
 		user_input := scanner.Text() // Retrieves the string value
+		current_room, ok := game_state.CurrentRoom()
+		if !ok {
+			fmt.Println("Current room not found")
+			return
+		}
 
+		fmt.Println(current_room.Description)
 		switch  {
 		case user_input == "list exits":
 			// if user types "list exits", print the exits
 			for direction, room_id := range current_room.Exits {
 				fmt.Println(direction, "->", room_id)
 			}
-		case user_input == "quit":
+		case user_input == "quit" || user_input == "exit":
 			// if user types "quit", quit the program
 			return
 		case user_input == "help":
 			// if user types "help", print the help message
 			fmt.Println("Available commands:")
 			fmt.Println("list exits - list the exits in the current room")
-			fmt.Println("quit - quit the program")
+			fmt.Println("quit/exit - quit the program")
 			fmt.Println("help - print this help message")
 			fmt.Println("move <direction> - move to the next room in the given direction")
 		case strings.HasPrefix(user_input, "move "):
 			direction := strings.TrimPrefix(user_input, "move ")
 			nextRoomID, ok := current_room.Exits[direction]
 			if ok {
-				current_room = level_data.Rooms[nextRoomID]
-				fmt.Println(current_room.Description)
+				game_state.currentRoomID = nextRoomID
+				fmt.Println(game_state.roomData[nextRoomID].Description)
 			} else {
 				fmt.Println("Invalid direction. Type 'help' for a list of commands.")
 			}
